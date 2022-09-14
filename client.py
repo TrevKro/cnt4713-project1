@@ -3,35 +3,25 @@
 import sys
 import socket
 
-Ip = sys.argv[1]
-Port = sys.argv[2]
-File = sys.argv[3]
-Size = 1024
-
-print(sys.argv)
-print(Ip)
+host = sys.argv[1]
+port = sys.argv[2]
+fileName = sys.argv[3]
+bufferSize = 4096 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-print(sock)
 
-sock.bind(("localhost", 4455))
-print(sock)
+print("Connecting to "+ str(host) + ":" + str(port))
+sock.connect((host, int(port)))
+print("Connected.")
 
-sock.listen(1)
-clientSocket, clientAddress = sock.accept()
-
-
-print("Accepted Connection form", clientAddress)
-
-data = clientSocket.recv(Size)
-if data:
-    print("Received bytes:", len(data))
-    l = clientSocket.send(data)
-    print("Send bytes: %d" % l)
-
-clientSocket.close()
+f = open(fileName,'rb')
+print("file opened")
+data = f.read()
+sock.sendfile(f)
+print("file sent. Closing connection")
+f.close()
 sock.close()
 
 
-#if __name__ == '__main__':
-#    sys.stderr.write("client is not implemented yet\n")
+# host = "131.94.128.43"
+# port = 54634
+# fileName = "file.txt"
