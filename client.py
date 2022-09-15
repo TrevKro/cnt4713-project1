@@ -24,14 +24,17 @@ else:
             sock.send(b'confirm-accio\r\n')
             sock.settimeout(10)
             sock.send(b'confirm-accio\r\n\r\n')
-            print("Second Recieved: " + str(sock.recv(1024)))
-            f = open(fileName,'rb')
-            print("file opened")
-            data = f.read()
-            sock.sendfile(f)
-            print("file sent. Closing connection.")
-            f.close()
+            print(sock.recv(1024)) == b'accio\r\n'
+            file = open(fileName,'rb')
+            sendData = file.read(1024)
+
+            while sendData:
+                print("file sending")
+                sock.send(sendData)
+                SendData = file.read(1024)
+            file.close()
             sock.close()
+            
     except socket.timeout as msg:
         sys.stderr.write("ERROR: Failed to connect\n")
         sys.exit()
