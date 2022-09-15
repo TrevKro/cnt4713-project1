@@ -27,9 +27,9 @@ else:
             print(sock.recv(1024)) == b'accio\r\n'
             file = open(fileName,'rb')
             sendData = file.read(1024)
-
+            print("trying to send file")
             while sendData:
-                print("file sending")
+                
                 sock.send(sendData)
                 SendData = file.read(1024)
             file.close()
