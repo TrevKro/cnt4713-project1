@@ -9,6 +9,7 @@ fileName = sys.argv[3]
 bufferSize = 4096 
 if int(port) > 0 and int(port) > 65535:
     sys.stderr.write("ERROR: port number is out off range 0-65535\n")
+    sys.exit()
 else:
     try:
         print("Connecting to "+ str(host) + ":" + str(port))
@@ -31,3 +32,4 @@ else:
             sock.close()
     except socket.timeout as msg:
         sys.stderr.write("ERROR: Failed to connect\n")
+        sys.exit()
