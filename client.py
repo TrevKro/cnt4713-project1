@@ -20,7 +20,9 @@ else:
             #print(sock)
             #dataFromServer = sock.recv(1024)
             print("First Recieved: " + str(sock.recv(1024)))
+            sock.settimeout(10)
             sock.send(b'confirm-accio\r\n')
+            sock.settimeout(10)
             sock.send(b'confirm-accio\r\n\r\n')
             print("Second Recieved: " + str(sock.recv(1024)))
             f = open(fileName,'rb')
@@ -32,4 +34,8 @@ else:
             sock.close()
     except socket.timeout as msg:
         sys.stderr.write("ERROR: Failed to connect\n")
+        sys.exit()
+
+    except socket.error as msg:
+        sys.stderr.write("ERROR: Failed\n")
         sys.exit()
