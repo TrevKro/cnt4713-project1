@@ -18,13 +18,19 @@ else:
             clientSocket, clientAddress = sock.accept()
             print("Accepted connection from", clientAddress)
             data = clientSocket.recv(1024)
-            if data:
-                print("received bytes:", len(data))
-                len = clientSocket.send(data)
-                print("send bytes: %d" % len)
+            #if data:
+             #   print("received bytes:", len(data))
+              #  len = clientSocket.send(data)
+               # print("send bytes: %d" % len)
+            total_size = 0
+            while True:
+                block = sock.recv(1024*1024)
+                if not block:
+                    break
+                print('Size of block: {}'.format(len(block)))
+                total_size += len(block)
 
-            clientSocket.close()
-            sock.close()
+            print('Total size: {}'.format(total_size))
         else:
             sys.exit()
     else:
