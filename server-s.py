@@ -13,6 +13,7 @@ else:
     sock.listen(10)
     sock.send("accio")
     if sock.recv(1024) == b'confirm-accio\r\n':
+        sock.send("accio")
         if sock.recv(1024) == b'confirm-accio\r\n\r\n':
             clientSocket, clientAddress = sock.accept()
             print("Accepted connection from", clientAddress)
