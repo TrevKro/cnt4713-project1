@@ -10,7 +10,7 @@ if int(port) > 0 and int(port) > 65535:
     sys.exit()
 else:    
     sock.bind(("0.0.0.0", int(port)))
-    sock.listen(1)
+    sock.listen(10)
     sock.send("accio")
     if sock.recv(1024) == b'confirm-accio\r\n':
         if sock.recv(1024) == b'confirm-accio\r\n\r\n':
