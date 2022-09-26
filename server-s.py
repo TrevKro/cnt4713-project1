@@ -11,6 +11,7 @@ else:
     sock.bind((host, int(port)))
     sock.listen(10)
     clientSocket, clientAddress = sock.accept()
+    clientSocket, clientAddress = sock.accept()
     sock.setblocking(False)
     sock.send("accio\r\n")
     if sock.recv(1024) == b'confirm-accio\r\n':
