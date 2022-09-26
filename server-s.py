@@ -2,7 +2,7 @@
 import sys
 import socket
 import selectors
-host = '0.0.0.0'
+host = 'localhost'
 port = sys.argv[1]
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print(sock)
