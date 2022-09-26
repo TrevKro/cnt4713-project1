@@ -7,7 +7,7 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print(sock)
 if int(port) < 0:
     sys.stderr.write("ERROR: port number is out off range 0-65535\n")
-    sys.exit()
+    exit(1)
 else:
     if int(port) < 65535:
         sock.bind(("0.0.0.0", int(port)))
