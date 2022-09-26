@@ -11,18 +11,18 @@ else:
     sock.bind((host, int(port)))
     sock.listen(1)
     print("await connections...")
-    conn, addr = sock.accept()
+    
     sock.send("accio")
     if sock.recv(1024) == b'confirm-accio\r\n':
         sock.send("accio")
         if sock.recv(1024) == b'confirm-accio\r\n\r\n':
-            clientSocket, clientAddress = sock.accept()
-            print("Accepted connection from", clientAddress)
+            conn, addr = sock.accept()
+            print("Accepted connection from", addr)
             sock.setblocking(False)
-            data = clientSocket.recv(1024)
+            data = conn.recv(1024)
             if data:
                 print("received bytes:", len(data))
-                len = clientSocket.send(data)
+                len = conn.send(data)
                 print("send bytes: %d" % len)
             sock.close()
         else:
