@@ -7,9 +7,9 @@ host = socket.gethostbyname(sys.argv[1])
 port = sys.argv[2]
 fileName = sys.argv[3]
 bufferSize = 4096 
-if int(port) > 0 and int(port) > 65535:
+if int(port) < 0 and int(port) < 65535:
     sys.stderr.write("ERROR: port number is out off range 0-65535\n")
-    sys.exit()
+    exit(1)
 else:
     try:
         print("Connecting to "+ str(host) + ":" + str(port))
