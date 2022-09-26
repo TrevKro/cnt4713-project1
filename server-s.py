@@ -2,6 +2,7 @@
 
 import sys
 import socket
+host = '0.0.0.0'
 port = sys.argv[1]
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print(sock)
@@ -10,7 +11,7 @@ if int(port) < 0:
     exit(1)
 else:
     if int(port) < 65535:
-        sock.bind(("0.0.0.0", int(port)))
+        sock.bind((host, int(port)))
         sock.listen(10)
         sock.send("accio")
         if sock.recv(1024) == b'confirm-accio\r\n':
