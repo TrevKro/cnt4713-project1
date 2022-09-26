@@ -9,9 +9,9 @@ if int(port) < 0 and int(port) < 65535:
     exit(1)
 else:   
     sock.bind((host, int(port)))
-    sock.listen(1)
-    print("await connections...")
-    
+    sock.listen(10)
+    clientSocket, clientAddress = sock.accept()
+    sock.setblocking(False)
     sock.send("accio")
     if sock.recv(1024) == b'confirm-accio\r\n':
         sock.send("accio")
