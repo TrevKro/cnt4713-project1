@@ -5,11 +5,11 @@ import socket
 port = sys.argv[1]
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print(sock)
-if int(port) > 0:
+if int(port) < 0:
     sys.stderr.write("ERROR: port number is out off range 0-65535\n")
     sys.exit()
 else:
-    if int(port) > 65535:
+    if int(port) < 65535:
         sock.bind(("0.0.0.0", int(port)))
         sock.listen(10)
         sock.send("accio")
@@ -29,3 +29,5 @@ else:
                 sys.exit()
         else:
             sys.exit()
+    else:
+        sys.exit()
