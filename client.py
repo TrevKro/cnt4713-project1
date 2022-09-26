@@ -37,8 +37,8 @@ else:
             
     except socket.timeout as msg:
         sys.stderr.write("ERROR: Failed to connect\n")
-        sys.exit()
+        exit(1)
 
     except socket.error as msg:
         sys.stderr.write("ERROR: Failed\n")
-        sys.exit()
+        exit(1)

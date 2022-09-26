@@ -16,13 +16,13 @@ else:
     if sock.recv(1024) == b'confirm-accio\r\n':
         sock.send("accio")
         if sock.recv(1024) == b'confirm-accio\r\n\r\n':
-            conn, addr = sock.accept()
-            print("Accepted connection from", addr)
+            clientSocket, clientAddress = sock.accept()
+            print("Accepted connection from", clientAddress)
             sock.setblocking(False)
-            data = conn.recv(1024)
+            data = clientSocket.recv(1024)
             if data:
                 print("received bytes:", len(data))
-                len = conn.send(data)
+                len = clientSocket.send(data)
                 print("send bytes: %d" % len)
             sock.close()
         else:
