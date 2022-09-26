@@ -1,8 +1,6 @@
-
 import sys
 import socket
-import selectors
-host = 'localhost'
+host = '0.0.0.0'
 port = sys.argv[1]
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print(sock)
@@ -11,8 +9,9 @@ if int(port) < 0 and int(port) < 65535:
     exit(1)
 else:   
     sock.bind((host, int(port)))
-    sock.listen(10)
-    sock.setblocking(False)
+    sock.listen(1)
+    print("await connections...")
+    conn, addr = sock.accept()
     sock.send("accio")
     if sock.recv(1024) == b'confirm-accio\r\n':
         sock.send("accio")
