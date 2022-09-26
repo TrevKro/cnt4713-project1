@@ -12,7 +12,7 @@ else:
     sock.listen(10)
     clientSocket, clientAddress = sock.accept()
     sock.setblocking(False)
-    sock.send("accio")
+    sock.send("accio\r\n")
     if sock.recv(1024) == b'confirm-accio\r\n':
         sock.send("accio")
         if sock.recv(1024) == b'confirm-accio\r\n\r\n':
